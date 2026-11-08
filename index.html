@@ -3,143 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bientôt réunis 💕</title>
+<title>Joyeux anniversaire 🎂</title>
 <style>
   * { box-sizing: border-box; }
   body {
-    margin: 0; min-height: 100vh; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(180deg, #ffeef2, #ffd6e2);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    margin: 0; color: #7a2f49;
+    background: linear-gradient(180deg, #ffeef2, #ffd6e2 60%, #ffe9d6);
+    background-attachment: fixed;
+    font-family: Georgia, "Times New Roman", serif;
   }
-  .card { position: relative; z-index: 2; text-align: center; padding: 30px 20px; width: 100%; max-width: 560px; }
-  .heart { font-size: 52px; animation: beat 1.4s ease-in-out infinite; }
-  @keyframes beat { 0%,100% { transform: scale(1); } 25% { transform: scale(1.18); } 40% { transform: scale(1); } }
-  .names { color: #d6567f; font-size: 22px; font-weight: 600; margin: 6px 0 4px; }
-  .title { font-size: 16px; color: #a3405c; margin-bottom: 28px; }
-  .units { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .unit { background: #fff; border-radius: 18px; padding: 16px 12px; min-width: 80px; box-shadow: 0 4px 14px rgba(214,90,130,.18); }
-  .number { font-size: 36px; font-weight: 600; color: #d6567f; font-variant-numeric: tabular-nums; }
-  .label { font-size: 12px; color: #b5788f; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
-  .track { position: relative; height: 10px; background: #fff; border-radius: 10px; margin: 44px 12px 8px; box-shadow: inset 0 1px 4px rgba(214,90,130,.2); }
-  .fill { height: 100%; width: 0; border-radius: 10px; background: linear-gradient(90deg, #ff9fb8, #e0527d); transition: width 1s; }
-  .train { position: absolute; top: -26px; left: 0; font-size: 22px; transform: translateX(-50%); transition: left 1s; }
-  .ends { display: flex; justify-content: space-between; margin: 0 8px; font-size: 20px; }
-  .percent { font-size: 13px; color: #b5788f; margin-top: 6px; }
-  .message { margin-top: 26px; min-height: 48px; font-size: 17px; color: #a3405c; font-style: italic; transition: opacity .6s; }
-  .float { position: fixed; bottom: -40px; z-index: 1; pointer-events: none; animation: rise linear forwards; }
+  .float { position: fixed; bottom: -40px; z-index: 0; pointer-events: none; animation: rise linear forwards; }
   @keyframes rise { to { transform: translateY(-115vh) rotate(25deg); opacity: 0; } }
-  @media (max-width: 480px) { .unit { min-width: 70px; padding: 12px 8px; } .number { font-size: 30px; } }
+
+  /* Écran d'accueil */
+  #cover {
+    position: fixed; inset: 0; z-index: 10; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; padding: 20px;
+    background: linear-gradient(180deg, #ffeef2, #ffd6e2); transition: opacity 1s, visibility 1s;
+  }
+  #cover.hide { opacity: 0; visibility: hidden; }
+  .gift { font-size: 90px; cursor: pointer; animation: bounce 1.6s ease-in-out infinite; background: none; border: 0; }
+  @keyframes bounce { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-14px) rotate(4deg); } }
+  #cover p { font-size: 20px; margin-top: 10px; }
+
+  main { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: 50px 20px 80px; text-align: center; }
+  h1 { font-size: 40px; margin: 0 0 6px; color: #d6567f; font-weight: normal; }
+  .sub { font-style: italic; margin-bottom: 40px; }
+  h2 { font-size: 24px; color: #d6567f; font-weight: normal; margin: 56px 0 18px; }
+  .sep { font-size: 20px; letter-spacing: 8px; opacity: .6; }
+
+  .letter {
+    background: #fffaf6; border-radius: 14px; padding: 30px 26px; text-align: left; line-height: 1.8;
+    font-size: 17px; box-shadow: 0 6px 20px rgba(214,90,130,.2); white-space: pre-line;
+  }
+  .sign { text-align: right; margin-top: 18px; font-style: italic; color: #d6567f; }
+
+  .audio-card {
+    background: #fff; border-radius: 18px; padding: 22px; box-shadow: 0 6px 20px rgba(214,90,130,.2);
+  }
+  .audio-card .note { font-size: 38px; margin-bottom: 6px; }
+  audio { width: 100%; margin-top: 10px; }
+
+  .photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 22px; }
+  .polaroid {
+    background: #fff; padding: 10px 10px 14px; border-radius: 4px; box-shadow: 0 5px 16px rgba(0,0,0,.15);
+    transition: transform .3s;
+  }
+  .polaroid:nth-child(odd) { transform: rotate(-3deg); }
+  .polaroid:nth-child(even) { transform: rotate(3deg); }
+  .polaroid:hover { transform: rotate(0) scale(1.05); }
+  .polaroid .img {
+    aspect-ratio: 1; background: #ffe3ea; border-radius: 2px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; font-size: 40px;
+  }
+  .polaroid img { width: 100%; height: 100%; object-fit: cover; }
+  .polaroid .cap { margin-top: 10px; font-size: 14px; font-style: italic; }
+
+  .reasons { display: grid; gap: 12px; text-align: left; }
+  .reason { background: #fff; border-radius: 12px; padding: 14px 18px; box-shadow: 0 3px 10px rgba(214,90,130,.15); }
+
+  .wish { margin-top: 60px; }
+  button.surprise {
+    border: 0; background: #d6567f; color: #fff; font-size: 18px; font-family: inherit;
+    padding: 14px 30px; border-radius: 30px; cursor: pointer; box-shadow: 0 6px 16px rgba(214,86,127,.4);
+    transition: transform .15s;
+  }
+  button.surprise:active { transform: scale(.96); }
+  #final { margin-top: 24px; font-size: 22px; min-height: 40px; color: #d6567f; }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <div class="heart">❤️</div>
-  <div class="names" id="names"></div>
-  <div class="title">Temps restant avant de se revoir</div>
-
-  <div class="units">
-    <div class="unit"><div class="number" id="days">00</div><div class="label">jours</div></div>
-    <div class="unit"><div class="number" id="hours">00</div><div class="label">heures</div></div>
-    <div class="unit"><div class="number" id="minutes">00</div><div class="label">minutes</div></div>
-    <div class="unit"><div class="number" id="seconds">00</div><div class="label">secondes</div></div>
-  </div>
-
-  <div class="track">
-    <div class="train" id="train">🚄</div>
-    <div class="fill" id="fill"></div>
-  </div>
-  <div class="ends"><span id="from">🏠</span><span id="to">🏠</span></div>
-  <div class="percent" id="percent"></div>
-
-  <div class="message" id="message"></div>
+<div id="cover">
+  <button class="gift" id="giftBtn">🎁</button>
+  <p>J’ai quelque chose pour toi…<br><small>(clique sur le cadeau)</small></p>
 </div>
+
+<main>
+  <h1 id="title"></h1>
+  <div class="sub" id="sub"></div>
+  <div class="sep">♥ ♥ ♥</div>
+
+  <h2>Pour toi 💌</h2>
+  <div class="letter">
+    <span id="letter"></span>
+    <div class="sign" id="sign"></div>
+  </div>
+
+  <h2>Écoute-moi 🎧</h2>
+  <div class="audio-card">
+    <div class="note">🎵</div>
+    <div id="audioTitle"></div>
+    <audio controls preload="metadata" id="audio"></audio>
+  </div>
+
+  <h2>Nos souvenirs 📸</h2>
+  <div class="photos" id="photos"></div>
+
+  <h2></h2>
+  <div class="reasons" id="reasons"></div>
+
+  <div class="wish">
+    <button class="surprise" id="surpriseBtn">Fais un vœu 🎂</button>
+    <div id="final"></div>
+  </div>
+</main>
 
 <script>
   // ==========================================================
-  //  
+  //  ✏️ MODIFIE TOUT ICI
   // ==========================================================
 
-  // Date et heure des retrouvailles  (format "AAAA-MM-JJTHH:MM:00")
-  const dateRetrouvailles = new Date("2026-11-13T22:00:00");
+  const prenom = "Loulou";                      
+  const titre = "Joyeux anniversaireeeeeee";           // titre principal
+  const sousTitre = "Aujourd’hui, c’est ton jour ✨";
+  const signature = "Avec tout mon amour, Milou 💕";
 
-  // Date dernier au revoir
-  const dateDepart = new Date("2026-11-01T21:52:00");
+  // Ta lettre (tu peux sauter des lignes normalement)
+  const lettre = `Mon amour,
+  
+On dit que la lumière des étoiles met des années à nous parvenir.
+Que ce qu’on regarde dans le ciel est parfois déjà du passé.
+Moi, je crois que c’est l’inverse :
+tu es la seule lumière qui arrive à traverser la distance
+sans rien perdre de son éclat.
 
-  // Prénoms
-  const prenoms = "Loulou 💗 Milou";
+Au début je pensais que tu étais une étoile, éclatant de milles feux,
+Mais je me rends compte maintenant que tu es finalement,
+Un groupement d'étoiles, qui ne fait que briller de plus en plus,
+Dont une étoile est ajoutée à chaque bougie.
 
-  // Emojis aux deux bouts de la barre
-  const emojiDepart = "🏠";
-  const emojiArrivee = "🏡";
+Alors souffle, fais un vœu.
+Et sache que le plus beau que je fasse chaque soir,
+c’est celui de te retrouver.
 
-  // Messages doux qui changent toutes les 8 secondes
-  const messages = [
-    ""
+Joyeux anniversaire mon amour 🌙
+
+`;
+
+  const audioFichier = "music.mp3";
+  const audioTitre = "";
+
+  const photos = [
+    { src: "photos/photo1.jpg", legende: "Notre premier souvenir" },
+    { src: "photos/photo2.jpg", legende: "Ce jour-là 🥰" },
+    { src: "photos/photo3.jpg", legende: "Toi, tout simplement" },
   ];
 
-  // Message quand le compte à rebours est fini
-  const messageFinal = "On se revoit enfin ! 💕🎉";
+  const raisons = [
+    "Ton sourire illumine mes journées",
+    "Tu es tellement radieuse, tous les jours",
+    "Tu es tellement douce, gentille, attentionnée",
+    "Mon ange"
+  ];
+
+  // Message après le vœu
+  const messageVoeu = "Que tous tes vœux se réalisent 🎉 Je t’aime ❤️";
 
   // ==========================================================
 
   const $ = id => document.getElementById(id);
-  const pad = n => String(n).padStart(2, '0');
-  const cute = ["My sweetie 💗","Je t'aime 💕","💖","🌸","✨","🤍", "Mon ange 💖"];
+  const cute = ["💗","💕","💖","🌸","✨","🤍","🎈"];
 
-  $('names').textContent = prenoms;
-  $('from').textContent = emojiDepart;
-  $('to').textContent = emojiArrivee;
+  $('title').textContent = `${titre} ${prenom} 🎂`;
+  $('sub').textContent = sousTitre;
+  $('letter').textContent = lettre;
+  $('sign').textContent = signature;
+  $('audioTitle').textContent = audioTitre;
+  $('audio').src = audioFichier;
 
-  function update() {
-    const now = new Date();
-    const diff = dateRetrouvailles - now;
-    const total = dateRetrouvailles - dateDepart;
-    const done = Math.min(100, Math.max(0, ((now - dateDepart) / total) * 100));
+  photos.forEach(p => {
+    const d = document.createElement('div');
+    d.className = 'polaroid';
+    d.innerHTML = '<div class="img"><img alt=""></div><div class="cap"></div>';
+    const img = d.querySelector('img');
+    img.src = p.src;
+    img.onerror = () => { img.parentNode.textContent = '📷'; };
+    d.querySelector('.cap').textContent = p.legende;
+    $('photos').appendChild(d);
+  });
 
-    $('fill').style.width = done + '%';
-    $('train').style.left = done + '%';
-    $('percent').textContent = Math.round(done) + '% du chemin parcouru';
+  raisons.forEach(r => {
+    const d = document.createElement('div');
+    d.className = 'reason';
+    d.textContent = '💗 ' + r;
+    $('reasons').appendChild(d);
+  });
 
-    if (diff <= 0) {
-      ['days','hours','minutes','seconds'].forEach(i => $(i).textContent = '00');
-      $('message').textContent = messageFinal;
-      $('percent').textContent = '100% du chemin parcouru 🎉';
-      return;
-    }
-    $('days').textContent = pad(Math.floor(diff / 864e5));
-    $('hours').textContent = pad(Math.floor(diff / 36e5) % 24);
-    $('minutes').textContent = pad(Math.floor(diff / 6e4) % 60);
-    $('seconds').textContent = pad(Math.floor(diff / 1e3) % 60);
-  }
-
-  // Messages qui tournent
-  let m = 0;
-  function nextMessage() {
-    if (dateRetrouvailles - new Date() <= 0) return;
-    const el = $('message');
-    el.style.opacity = 0;
-    setTimeout(() => { el.textContent = messages[m++ % messages.length]; el.style.opacity = 1; }, 600);
-  }
-
-  // Petits cœurs qui montent
-  function spawn() {
+  function spawn(fast) {
     const e = document.createElement('div');
     e.className = 'float';
     e.textContent = cute[Math.floor(Math.random() * cute.length)];
     e.style.left = Math.random() * 100 + 'vw';
-    e.style.fontSize = 14 + Math.random() * 22 + 'px';
-    e.style.animationDuration = 6 + Math.random() * 6 + 's';
+    e.style.fontSize = 14 + Math.random() * 24 + 'px';
+    e.style.animationDuration = (fast ? 3 : 6) + Math.random() * 5 + 's';
     e.style.opacity = 0.5 + Math.random() * 0.4;
     document.body.appendChild(e);
     setTimeout(() => e.remove(), 12000);
   }
 
-  update(); nextMessage();
-  setInterval(update, 1000);
-  setInterval(nextMessage, 8000);
-  setInterval(spawn, 700);
+  $('giftBtn').addEventListener('click', () => {
+    $('cover').classList.add('hide');
+    for (let i = 0; i < 25; i++) setTimeout(() => spawn(true), i * 60);
+    setInterval(spawn, 900);
+  });
+
+  $('surpriseBtn').addEventListener('click', () => {
+    $('final').textContent = messageVoeu;
+    for (let i = 0; i < 50; i++) setTimeout(() => spawn(true), i * 50);
+  });
 </script>
 
 </body>
